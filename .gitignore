@@ -1,0 +1,12 @@
+# On ignore les fichiers issus de la compilation...
+*.o
+*.ali
+
+# ... les fichiers temporaires créés par vim
+*~
+
+# ... les fichiers svg obtenus lors des tests
+*.svg
+
+# et les fichiers inutiles
+default.gpr
