@@ -2,12 +2,12 @@ package boite is
    -- Contient des méthodes pour créer une boite
 
    type Boite is record
-	t: Natural; -- epaisseur
-	l: Natural; -- longueur
-	w: Natural; -- largeur
-	q: Natural; -- longueurQueue
-	h: Natural; -- hauteur
-	b: Natural; -- hauteur interne (doit vérifier b<h-2t)
+	epaisseur: Natural; -- t
+	longueur: Natural; -- l
+	largeur: Natural; -- w
+	longueur_queue: Natural; -- q
+	hauteur: Natural; -- h
+	hauteur_interne: Natural; -- b (doit vérifier b<h-2t)
 	nomFichier: String(1..100); -- nom du fichier limité à 100 caracteres
    end record;
 
