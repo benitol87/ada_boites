@@ -1,5 +1,4 @@
 with boite;	use boite;
-with commande;	use commande;
 
 procedure main is
 begin
