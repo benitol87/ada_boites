@@ -1,15 +1,33 @@
 # Test du package fichier
 echo "Test du package fichier"
-gnatmake test_fichier.adb
+gnatmake -q test_fichier.adb
 rm test.svg 2>/dev/null
+
 ./test_fichier
-echo "Contenu du fichier : "
-cat test.svg
+if test `cat test.svg` = "<svg></svg>"
+then
+	echo "  Test OK"
+else
+	echo "  Echec du test"
+fi
+
 rm test_fichier
 rm test.svg
 echo
 
-# Test 
+# Test du package svg
+echo "Test du package svg"
+gnatmake -q test_svg.adb
+./test_svg 
+if test $? -eq 0
+then
+	echo "  Un fichier etoile.svg représentant une étoile a été créé"
+	echo "  Test OK"
+else
+	echo "  Echec du test"
+fi
+rm test_svg
+echo
 
 # Test
 
