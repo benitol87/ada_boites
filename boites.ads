@@ -1,4 +1,4 @@
-package boite is
+package boites is
    -- Contient des méthodes pour créer une boite
 
    type Boite is record
