@@ -18,7 +18,7 @@ package svg is
    function NouveauPolygone return Polygone;
 
    -- Ajoute un point à la liste de ceux du polygone passe en parametre
-   procedure AjouterPointPolygone(Poly: in out Polygone; X,Y: Natural);
+   procedure AjouterPointPolygone(Poly: in out Polygone; X,Y: Float);
 
 
 

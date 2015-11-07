@@ -22,15 +22,27 @@ gnatmake -q test_svg.adb
 if test $? -eq 0
 then
 	echo "  Un fichier etoile.svg représentant une étoile a été créé"
-	echo "  Test OK"
+	echo "  Test OK jusqu'ici"
 else
 	echo "  Echec du test"
 fi
 rm test_svg
 echo
 
-# Test
+# Test du package boites
+echo "Test du package boites"
+gnatmake -q test_boites.adb
+./test_boites
+if test $? -eq 0
+then
+	echo "  Les fichiers test1.svg et test2.svg ont été créés"
+	echo "  Test OK jusqu'ici"
+else
+	echo "  Echec du test"
+fi
+rm test_boites
+echo
 
-
+# Suppression des fichiers créés par la compilation
 rm *.ali
 rm *.o

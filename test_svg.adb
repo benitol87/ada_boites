@@ -15,11 +15,11 @@ begin
    P:=NouveauPolygone;
 
    -- Ajout de quelques points
-   AjouterPointPolygone(Poly => P, X => 100, Y =>  10);
-   AjouterPointPolygone(Poly => P, X =>  40, Y => 198);
-   AjouterPointPolygone(Poly => P, X => 190, Y =>  78);
-   AjouterPointPolygone(Poly => P, X =>  10, Y =>  78);
-   AjouterPointPolygone(Poly => P, X => 160, Y => 198);
+   AjouterPointPolygone(Poly => P, X => 100.0, Y =>  10.0);
+   AjouterPointPolygone(Poly => P, X =>  40.0, Y => 198.0);
+   AjouterPointPolygone(Poly => P, X => 190.0, Y =>  78.0);
+   AjouterPointPolygone(Poly => P, X =>  10.0, Y =>  78.0);
+   AjouterPointPolygone(Poly => P, X => 160.0, Y => 198.0);
 
    -- Dessin du polygone
    DessinerPolygone(P, F);

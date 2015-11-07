@@ -1,3 +1,5 @@
+with Ada.Strings.Unbounded;	use Ada.Strings.Unbounded;
+
 package boites is
    -- Contient des méthodes pour créer une boite
 
@@ -8,10 +10,12 @@ package boites is
 	longueur_queue: Natural; -- q
 	hauteur: Natural; -- h
 	hauteur_interne: Natural; -- b (doit vérifier b<h-2t)
-	nomFichier: String(1..100); -- nom du fichier limité à 100 caracteres
+	nomFichier: Unbounded_String; -- nom du fichier
    end record;
 
    -- Cree un fichier SVG a partir des données d'une boite
-   procedure creerBoite(b: Boite);
+   -- Pré-conditions :
+   --    - Les données dans la variable B doivent avoir été vérifiées
+   procedure creerBoite(B: Boite);
 
 end;

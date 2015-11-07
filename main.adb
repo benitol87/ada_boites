@@ -1,6 +1,7 @@
 with boites;	use boites;
 with Ada.Command_Line;  use Ada.Command_Line;
 with Ada.Text_IO;       use Ada.Text_IO;
+with Ada.Strings.Unbounded;	use Ada.Strings.Unbounded;
 
 procedure main is
    b0: Boite;
@@ -40,7 +41,7 @@ procedure main is
             b.hauteur_interne := Argument(Arg+1);
          elsif Argument(Arg) = "-f" then
             nom_fichier_entree := True;
-            b.nom_fichier := Argument(Arg+1);
+            b.nom_fichier := To_Unbounded_String(Argument(Arg+1));
          end if;
       end loop;
       -- vefification que la totalite des parametres de la boite soit remplie
