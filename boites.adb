@@ -48,18 +48,18 @@ package body boites is
 
       -- Calcul du nombre d'encoches et de queues horizontalement
       NbEncochesQueuesHorizontales := DB.longueur / DB.longueur_queue;
-      if DB.longueur mod DB.longueur_queue < 2*DB.epaisseur then
+      while DB.longueur - NbEncochesQueuesHorizontales*DB.longueur_queue < 2*DB.epaisseur loop
          NbEncochesQueuesHorizontales := NbEncochesQueuesHorizontales - 1;
-      end if;
+      end loop;
       if NbEncochesQueuesHorizontales mod 2 = 0 then
          NbEncochesQueuesHorizontales := NbEncochesQueuesHorizontales - 1;
       end if;
 
       -- Calcul du nombre d'encoches et de queues verticalement
       NbEncochesQueuesVerticales := DB.largeur / DB.longueur_queue - 1;
-      if DB.largeur mod DB.longueur_queue <= 2*DB.epaisseur then
+      while DB.largeur - NbEncochesQueuesVerticales*DB.longueur_queue <= 2*DB.epaisseur loop
          NbEncochesQueuesVerticales := NbEncochesQueuesVerticales - 1;
-      end if;
+      end loop;
       if NbEncochesQueuesVerticales mod 2 = 0 then
          NbEncochesQueuesVerticales := NbEncochesQueuesVerticales - 1;
       end if;
@@ -150,18 +150,18 @@ package body boites is
    begin
       -- Calcul du nombre d'encoches et de queues horizontalement
       NbEncochesQueuesHorizontales := DB.longueur / DB.longueur_queue;
-      if DB.longueur mod DB.longueur_queue < 2*DB.epaisseur then
+      while DB.longueur - NbEncochesQueuesHorizontales*DB.longueur_queue < 2*DB.epaisseur loop
          NbEncochesQueuesHorizontales := NbEncochesQueuesHorizontales - 1;
-      end if;
+      end loop;
       if NbEncochesQueuesHorizontales mod 2 = 0 then
          NbEncochesQueuesHorizontales := NbEncochesQueuesHorizontales - 1;
       end if;
       
       -- Calcul du nombre d'encoches et de queues verticalement
       NbEncochesQueuesVerticales := DB.hauteur / DB.longueur_queue;
-      if DB.hauteur mod DB.longueur_queue <= 2*DB.epaisseur then
+      while DB.hauteur - NbEncochesQueuesVerticales*DB.longueur_queue < 2*DB.epaisseur loop 
          NbEncochesQueuesVerticales := NbEncochesQueuesVerticales - 1;
-      end if;
+      end loop;
       if NbEncochesQueuesVerticales mod 2 = 0 then
          NbEncochesQueuesVerticales := NbEncochesQueuesVerticales - 1;
       end if;
@@ -237,18 +237,18 @@ package body boites is
    begin
       -- Calcul du nombre d'encoches et de queues horizontalement
       NbEncochesQueuesHorizontales := DB.largeur / DB.longueur_queue - 1;
-      if DB.largeur mod DB.longueur_queue <= 2*DB.epaisseur then
+      while DB.largeur - NbEncochesQueuesHorizontales*DB.longueur_queue < 2*DB.epaisseur loop
          NbEncochesQueuesHorizontales := NbEncochesQueuesHorizontales - 1;
-      end if;
+      end loop;
       if NbEncochesQueuesHorizontales mod 2 = 0 then
          NbEncochesQueuesHorizontales := NbEncochesQueuesHorizontales - 1;
       end if;
       
       -- Calcul du nombre d'encoches et de queues verticalement
       NbEncochesQueuesVerticales := DB.hauteur / DB.longueur_queue;
-      if DB.hauteur mod DB.longueur_queue <= 2*DB.epaisseur then
+      while DB.hauteur  - NbEncochesQueuesVerticales*DB.longueur_queue < 2*DB.epaisseur loop
          NbEncochesQueuesVerticales := NbEncochesQueuesVerticales - 1;
-      end if;
+      end loop;
       if NbEncochesQueuesVerticales mod 2 = 0 then
          NbEncochesQueuesVerticales := NbEncochesQueuesVerticales - 1;
       end if;

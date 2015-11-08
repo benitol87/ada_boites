@@ -4,6 +4,7 @@
 
 # ... les fichiers temporaires créés par vim
 *~
+*.swp
 
 # ... les fichiers svg obtenus lors des tests
 *.svg
