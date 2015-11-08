@@ -35,6 +35,54 @@ package body boites is
       return resultat;
    end;
 
+   function NbEncochesQueuesLongueur(DB: DemiBoite) return Natural is
+      resultat: Natural;
+   begin
+      resultat := DB.longueur / DB.longueur_queue;
+
+      while DB.longueur - resultat*DB.longueur_queue < 2*DB.epaisseur loop
+         resultat := resultat - 1;
+      end loop;
+
+      if resultat mod 2 = 0 then
+         resultat := resultat - 1;
+      end if;
+
+      return resultat;
+   end;
+
+   function NbEncochesQueuesLargeur(DB: DemiBoite) return Natural is
+      resultat: Natural;
+   begin
+      resultat := DB.largeur / DB.longueur_queue - 1;
+
+      while DB.largeur - resultat*DB.longueur_queue <= 2*DB.epaisseur loop
+         resultat := resultat - 1;
+      end loop;
+
+      if resultat mod 2 = 0 then
+         resultat := resultat - 1;
+      end if;
+
+      return resultat;
+   end;
+
+   function NbEncochesQueuesHauteur(DB: DemiBoite) return Natural is
+      resultat: Natural;
+   begin
+      resultat := DB.hauteur / DB.longueur_queue;
+
+      while DB.hauteur  - resultat*DB.longueur_queue < 2*DB.epaisseur loop
+         resultat := resultat - 1;
+      end loop;
+      
+      if resultat mod 2 = 0 then
+         resultat := resultat - 1;
+      end if;
+
+      return resultat;
+   end;
+
    -- Procedure pour dessiner la face longueur*largeur
    procedure DessinerGrandeFace(DB: DemiBoite; Fic: File_Type) is
       xCourant,yCourant : Float := 0.0;
@@ -47,22 +95,10 @@ package body boites is
       AjouterPointPolygone(P, xCourant+AncreX, yCourant+AncreY);
 
       -- Calcul du nombre d'encoches et de queues horizontalement
-      NbEncochesQueuesHorizontales := DB.longueur / DB.longueur_queue;
-      while DB.longueur - NbEncochesQueuesHorizontales*DB.longueur_queue < 2*DB.epaisseur loop
-         NbEncochesQueuesHorizontales := NbEncochesQueuesHorizontales - 1;
-      end loop;
-      if NbEncochesQueuesHorizontales mod 2 = 0 then
-         NbEncochesQueuesHorizontales := NbEncochesQueuesHorizontales - 1;
-      end if;
+      NbEncochesQueuesHorizontales := NbEncochesQueuesLongueur(DB);
 
       -- Calcul du nombre d'encoches et de queues verticalement
-      NbEncochesQueuesVerticales := DB.largeur / DB.longueur_queue - 1;
-      while DB.largeur - NbEncochesQueuesVerticales*DB.longueur_queue <= 2*DB.epaisseur loop
-         NbEncochesQueuesVerticales := NbEncochesQueuesVerticales - 1;
-      end loop;
-      if NbEncochesQueuesVerticales mod 2 = 0 then
-         NbEncochesQueuesVerticales := NbEncochesQueuesVerticales - 1;
-      end if;
+      NbEncochesQueuesVerticales := NbEncochesQueuesLargeur(DB);
 
       -- Coin haut-gauche vers coin haut-droite
       xCourant := Float(DB.longueur - DB.longueur_queue*NbEncochesQueuesHorizontales)/2.0;
@@ -149,22 +185,10 @@ package body boites is
       NbEncochesQueuesHorizontales, NbEncochesQueuesVerticales: Natural;
    begin
       -- Calcul du nombre d'encoches et de queues horizontalement
-      NbEncochesQueuesHorizontales := DB.longueur / DB.longueur_queue;
-      while DB.longueur - NbEncochesQueuesHorizontales*DB.longueur_queue < 2*DB.epaisseur loop
-         NbEncochesQueuesHorizontales := NbEncochesQueuesHorizontales - 1;
-      end loop;
-      if NbEncochesQueuesHorizontales mod 2 = 0 then
-         NbEncochesQueuesHorizontales := NbEncochesQueuesHorizontales - 1;
-      end if;
+      NbEncochesQueuesHorizontales := NbEncochesQueuesLongueur(DB);
       
       -- Calcul du nombre d'encoches et de queues verticalement
-      NbEncochesQueuesVerticales := DB.hauteur / DB.longueur_queue;
-      while DB.hauteur - NbEncochesQueuesVerticales*DB.longueur_queue < 2*DB.epaisseur loop 
-         NbEncochesQueuesVerticales := NbEncochesQueuesVerticales - 1;
-      end loop;
-      if NbEncochesQueuesVerticales mod 2 = 0 then
-         NbEncochesQueuesVerticales := NbEncochesQueuesVerticales - 1;
-      end if;
+      NbEncochesQueuesVerticales := NbEncochesQueuesHauteur(DB);
 
       -- Coin haut-gauche vers coin haut-droite
       xCourant := Float(DB.epaisseur);
@@ -236,22 +260,10 @@ package body boites is
       NbEncochesQueuesHorizontales, NbEncochesQueuesVerticales: Natural;
    begin
       -- Calcul du nombre d'encoches et de queues horizontalement
-      NbEncochesQueuesHorizontales := DB.largeur / DB.longueur_queue - 1;
-      while DB.largeur - NbEncochesQueuesHorizontales*DB.longueur_queue < 2*DB.epaisseur loop
-         NbEncochesQueuesHorizontales := NbEncochesQueuesHorizontales - 1;
-      end loop;
-      if NbEncochesQueuesHorizontales mod 2 = 0 then
-         NbEncochesQueuesHorizontales := NbEncochesQueuesHorizontales - 1;
-      end if;
+      NbEncochesQueuesHorizontales := NbEncochesQueuesLargeur(DB);
       
       -- Calcul du nombre d'encoches et de queues verticalement
-      NbEncochesQueuesVerticales := DB.hauteur / DB.longueur_queue;
-      while DB.hauteur  - NbEncochesQueuesVerticales*DB.longueur_queue < 2*DB.epaisseur loop
-         NbEncochesQueuesVerticales := NbEncochesQueuesVerticales - 1;
-      end loop;
-      if NbEncochesQueuesVerticales mod 2 = 0 then
-         NbEncochesQueuesVerticales := NbEncochesQueuesVerticales - 1;
-      end if;
+      NbEncochesQueuesVerticales := NbEncochesQueuesHauteur(DB); 
 
       -- Coin haut-gauche vers coin haut-droite 
       yCourant := Float(DB.epaisseur);

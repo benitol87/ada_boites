@@ -35,7 +35,7 @@ gnatmake -q test_boites.adb
 ./test_boites
 if test $? -eq 0
 then
-	echo "  Les fichiers test1.svg et test2.svg ont été créés"
+	echo "  Les fichiers test01.svg à test06.svg ont été créés"
 	echo "  Test OK jusqu'ici"
 else
 	echo "  Echec du test"
