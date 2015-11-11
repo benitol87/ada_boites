@@ -44,7 +44,7 @@ package body boites is
          resultat := resultat - 1;
       end loop;
 
-      if resultat mod 2 = 0 then
+      if resultat mod 2 = 0 and then resultat>0 then
          resultat := resultat - 1;
       end if;
 
@@ -60,7 +60,7 @@ package body boites is
          resultat := resultat - 1;
       end loop;
 
-      if resultat mod 2 = 0 then
+      if resultat mod 2 = 0 and then resultat>0 then
          resultat := resultat - 1;
       end if;
 
