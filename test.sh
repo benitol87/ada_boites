@@ -52,12 +52,19 @@ mkdir $dir 2>/dev/null
   # Test des arguments manquants + cas quelconque à la fin
 echo "  Test de la commande avec des arguments manquants"
 ./main >/dev/null && echo "  Echec du test"
-./main -f ${dir}/fichier.svg >/dev/null && echo "  Echec du test"
-./main -f ${dir}/fichier.svg -l 200 >/dev/null && echo "  Echec du test"
-./main -f ${dir}/fichier.svg -l 200 -w 140 >/dev/null && echo "  Echec du test"
-./main -f ${dir}/fichier.svg -l 200 -w 140 -h 80 >/dev/null && echo "  Echec du test"
-./main -f ${dir}/fichier.svg -l 200 -w 140 -h 80 -b 50 >/dev/null && echo "  Echec du test"
-./main -f ${dir}/fichier.svg -l 200 -w 140 -h 80 -b 50 -t 5 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/fichier_fail1.svg >/dev/null && echo "  Echec du test"
+./main -f ${dir}/fichier_fail2.svg -l 200 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/fichier_fail3.svg -l 200 -w 140 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/fichier_fail4.svg -l 200 -w 140 -h 80 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/fichier_fail5.svg -l 200 -w 140 -h 80 -b 50 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/fichier_fail6.svg -l 200 -w 140 -h 80 -b 50 -t 5 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/fichier_fail7.svg -l 200 -w 140 -h 80 -b 50 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/fichier_fail8.svg -l 200 -w 140 -h 80 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/fichier_fail9.svg -l 200 -w 140 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/fichier_fail10.svg -l 200 -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/fichier_fail11.svg -w 140 -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+
+  # Test cas normaux (avec permutation largeur/longueur)
 ./main -f ${dir}/fichier.svg -l 200 -w 140 -h 80 -b 50 -t 5 -q 10 >/dev/null || echo "  Echec du test"
 ./main -f ${dir}/fichier2.svg -l 140 -w 200 -h 80 -b 50 -t 5 -q 10 >/dev/null || echo "  Echec du test"
 
@@ -83,7 +90,6 @@ echo "  Cas l<=4t"
 echo "  Cas w<=4t"
 ./main -f ${dir}/lim5_fail1.svg -l 200 -w 80 -h 80 -b 40 -t 21 -q 1 >/dev/null && echo "  Echec du test"
 ./main -f ${dir}/lim5_fail2.svg -l 200 -w 80 -h 80 -b 40 -t 20 -q 1 >/dev/null && echo "  Echec du test"
-./main -f ${dir}/lim5.svg -l 200 -w 80 -h 80 -b 40 -t 19 -q 1 >/dev/null || echo "  Echec du test"
 
 echo "  Cas q>=l-2t"
 ./main -f ${dir}/lim6_fail1.svg -l 100 -w 100 -h 205 -b 100 -t 10 -q 81 >/dev/null && echo "  Echec du test"
@@ -107,45 +113,42 @@ echo "  Cas q>=b-2t"
 
 # Valeurs non numériques
 echo "  Cas des paramètres non numériques"
-./main -f ${dir}/fail.svg -l -w 140 -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
-
-./main -f ${dir}/fail.svg -l 200 -w -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
-
-./main -f ${dir}/fail.svg -l 200 -w 140 -h -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
-
-./main -f ${dir}/fail.svg -l 200 -w 140 -h 80 -b -t 5 -q 10 >/dev/null && echo "  Echec du test"
-
-./main -f ${dir}/fail.svg -l 200 -w 140 -h 80 -b 50 -t -q 10 >/dev/null && echo "  Echec du test"
-
-./main -f ${dir}/fail.svg -l 200 -w 140 -h 80 -b 50 -t 5 -q -f >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failn1.svg -l -w 140 -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failn2.svg -l 200 -w -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failn3.svg -l 200 -w 140 -h -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failn4.svg -l 200 -w 140 -h 80 -b -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failn5.svg -l 200 -w 140 -h 80 -b 50 -t -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failn6.svg -l 200 -w 140 -h 80 -b 50 -t 5 -q -f >/dev/null && echo "  Echec du test"
 
 # Valeurs négatives
 echo "  Cas des paramètres négatifs"
-./main -f ${dir}/fail.svg -l -1 -w 140 -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
-
-./main -f ${dir}/fail.svg -l 200 -w -2 -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
-
-./main -f ${dir}/fail.svg -l 200 -w 140 -h -3 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
-
-./main -f ${dir}/fail.svg -l 200 -w 140 -h 80 -b -4 -t 5 -q 10 >/dev/null && echo "  Echec du test"
-
-./main -f ${dir}/fail.svg -l 200 -w 140 -h 80 -b 50 -t -5 -q 10 >/dev/null && echo "  Echec du test"
-
-./main -f ${dir}/fail.svg -l 200 -w 140 -h 80 -b 50 -t 5 -q -6 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failm1.svg -l -1 -w 140 -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failm1.svg -l 200 -w -2 -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failm3.svg -l 200 -w 140 -h -3 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failm4.svg -l 200 -w 140 -h 80 -b -4 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failm5.svg -l 200 -w 140 -h 80 -b 50 -t -5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failm6.svg -l 200 -w 140 -h 80 -b 50 -t 5 -q -6 >/dev/null && echo "  Echec du test"
 
 # Valeurs nulles
 echo "  Cas des paramètres nuls"
-./main -f ${dir}/fail1.svg -l 0 -w 140 -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failz1.svg -l 0 -w 140 -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failz2.svg -l 200 -w 0 -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failz3.svg -l 200 -w 140 -h 0 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failz4.svg -l 200 -w 140 -h 80 -b 0 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failz5.svg -l 200 -w 140 -h 80 -b 50 -t 0 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/failz6.svg -l 200 -w 140 -h 80 -b 50 -t 5 -q 0 >/dev/null && echo "  Echec du test"
 
-./main -f ${dir}/fail2.svg -l 200 -w 0 -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+# Options non existantes
+echo "  Cas des options non reconnues"
+./main -f ${dir}/faili1.svg -L 200 -w 140 -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/faili2.svg -l 200 -W 140 -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/faili3.svg -l 200 -w 140 -H 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/faili4.svg -l 200 -w 140 -h 80 -B 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/faili5.svg -l 200 -w 140 -h 80 -b 50 -T 5 -q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/faili6.svg -l 200 -w 140 -h 80 -b 50 -t 5 -Q 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/faili7.svg -l 200 -w 140 -h 80 -b 50 -t 5 -q 10 -n 10 >/dev/null && echo "  Echec du test"
+./main -f ${dir}/faili8.svg --l 200 -w 140 -h 80 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
 
-./main -f ${dir}/fail3.svg -l 200 -w 140 -h 0 -b 50 -t 5 -q 10 >/dev/null && echo "  Echec du test"
-
-./main -f ${dir}/fail4.svg -l 200 -w 140 -h 80 -b 0 -t 5 -q 10 >/dev/null && echo "  Echec du test"
-
-./main -f ${dir}/fail5.svg -l 200 -w 140 -h 80 -b 50 -t 0 -q 10 >/dev/null && echo "  Echec du test"
-
-./main -f ${dir}/fail6.svg -l 200 -w 140 -h 80 -b 50 -t 5 -q 0 >/dev/null && echo "  Echec du test"
 
 rm main
 echo
