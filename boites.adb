@@ -4,6 +4,7 @@ with Ada.text_io;	use Ada.text_io;
 
 package body boites is
     MARGE_SVG: constant Float := 5.0; -- Marge entre les différents polygones
+    MIN_MARGE: constant Float := 1.0; -- Longueur minimale d'une encoche/queue
 
     -- Point d'ancrage utilisé lors du dessin
     AncreX, AncreY : Float;
@@ -54,9 +55,9 @@ package body boites is
     function NbEncochesQueuesLargeur(DB: DemiBoite) return Natural is
         resultat: Natural;
     begin
-        resultat := DB.largeur / DB.longueur_queue - 1;
+        resultat := DB.largeur / DB.longueur_queue;
 
-        while DB.largeur - resultat*DB.longueur_queue <= 2*DB.epaisseur loop
+        while DB.largeur - resultat*DB.longueur_queue <= 2*(DB.epaisseur+MIN_MARGE) loop
             resultat := resultat - 1;
         end loop;
 
@@ -72,7 +73,7 @@ package body boites is
     begin
         resultat := DB.hauteur / DB.longueur_queue;
 
-        while DB.hauteur  - resultat*DB.longueur_queue < 2*DB.epaisseur loop
+        while DB.hauteur - resultat*DB.longueur_queue < DB.epaisseur+MIN_MARGE loop
             resultat := resultat - 1;
         end loop;
 
