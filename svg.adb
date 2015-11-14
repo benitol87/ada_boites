@@ -16,7 +16,7 @@ package body svg is
 	begin
 		Ecrire_Fichier(Fic, "<polygon points='");
 		Ecrire_Fichier(Fic, To_String(P.points));
-		Ecrire_Fichier(Fic, "' style='fill:none;stroke:" & COULEUR & ";stroke-width:" & EPAISSEUR & "' />");
+		Ecrire_Fichier(Fic, "' style='fill:none;stroke:" & To_String(COULEUR) & ";stroke-width:" & To_String(EPAISSEUR) & "' />");
 	end;
 
 	-- Crée un polygone sans points et le retourne

@@ -2,8 +2,8 @@ with Ada.Strings.Unbounded;	use Ada.Strings.Unbounded;
 with Ada.Text_IO;	use Ada.Text_IO;
 
 package svg is
-	EPAISSEUR : String := "0.1";
-	COULEUR : String := "red";
+	EPAISSEUR : Unbounded_String := To_Unbounded_String("0.1");
+	COULEUR : Unbounded_String := To_Unbounded_String("red");
 	
 	-- Contient des méthodes qui écrivent dans le fichier svg
 	-- (écrire une balise ouvrante ou fermante, un polygone, ...)

@@ -1,8 +1,8 @@
 with Ada.Strings.Unbounded;	use Ada.Strings.Unbounded;
 
 package boites is
-	MIN_MARGE: constant Float := 1.0; -- Longueur minimale d'une encoche/queue
-	MARGE_SVG: constant Float := 5.0; -- Marge entre les différents polygones
+	MIN_MARGE: Float := 1.0; -- Longueur minimale d'une encoche/queue de longueur =/= q
+	MARGE_SVG: Float := 5.0; -- Marge entre les différents polygones
 
 	type Boite is record
 		epaisseur: Natural; -- t
