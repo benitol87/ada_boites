@@ -3,10 +3,16 @@ with Ada.Command_Line;  use Ada.Command_Line;
 with Ada.Text_IO;       use Ada.Text_IO;
 with Ada.Strings.Unbounded;	use Ada.Strings.Unbounded;
 
+-- Point d'entree du programme
 procedure main is
     b0: Boite;
     Erreur_Parametres_Exception : exception;
 
+    -- Fonction recuperant les arguments en ligne de commande et les placant dans 
+    -- une variable de type boite
+    -- Traite le cas ou les parametres n'ont pas le bon type (nombre negatif ou mot
+    -- au lieu d'un entier naturel par exemple)
+    -- Traite le cas d'options manquantes
     function RecupererArguments return Boite is
         b: Boite;
         longueur_entree: Boolean:= False;
@@ -77,6 +83,7 @@ procedure main is
             end if;
             Arg := Arg + 2;
         end loop;
+
         -- verification que la totalite des parametres de la boite soit remplie
         if longueur_entree = False then
             Put_Line("Erreur : longueur non specifiee (option -l <longueur>)");
@@ -101,6 +108,10 @@ procedure main is
         return b;
     end;
 
+    -- Procedure qui compare les donnees d'une boite par rapport aux limites autorisees
+    -- Requiert : Toutes les attributs de la boite ont ete initialises
+    -- Si cette procedure ne lance pas d'exceptions, alors la variable Boite peut
+    -- etre passee en parametre a la procedure creerBoite du package boites
     procedure VerifierDonnees(B: in out Boite) is
         problemeDetecte : Boolean := False;
         temp : Natural;
@@ -138,11 +149,11 @@ procedure main is
             problemeDetecte:=True;
         end if;
 
-        -- Cas q>=l-2t, q>=w-2t, q>=h/2-2t, q>=b-2t
-        if B.longueur_queue >= B.longueur-2*B.epaisseur or
-            B.longueur_queue >= B.largeur-2*B.epaisseur or
-            B.longueur_queue >= B.hauteur/2-2*B.epaisseur or
-            B.longueur_queue >= B.hauteur_interne-2*B.epaisseur
+        -- Cas q>=l-4t, q>=w-2(2t+MIN_MARGE), q>=h/2-t-MIN_MARGE, q>=b-t-MIN_MARGE
+        if B.longueur_queue > B.longueur-4*B.epaisseur or
+            B.longueur_queue > B.largeur-2*(2*B.epaisseur+Natural(MIN_MARGE)) or
+            B.longueur_queue > B.hauteur/2-B.epaisseur-Natural(MIN_MARGE) or
+            B.longueur_queue > B.hauteur_interne-B.epaisseur-Natural(MIN_MARGE)
         then
             Put_Line("Erreur : La longueur de queue est trop grande par rapport aux autres dimensions de la boite et ne permet pas de faire des encoches sur certaines aretes.");
             problemeDetecte:=True;
@@ -154,7 +165,7 @@ procedure main is
     end;
 begin
     begin
-
+	-- Point d'entree de l'application
         -- Analyse de la ligne de commande, récupération des données
         b0 := RecupererArguments;
 
@@ -165,9 +176,11 @@ begin
         creerBoite(b0);
 
     exception
+        -- Option manquante/valeur d'au moins un parametre non coherent avec les autres
         when Erreur_Parametres_Exception =>
             Put_Line("Echec lors de la creation du fichier svg");
             Set_Exit_Status(1);
+	-- Type de parametre illegal
         when Constraint_Error =>
             Put_Line("Au moins un des arguments attendus aurait du etre un entier strictement positif");
             Put_Line("Echec lors de la creation du fichier svg");

@@ -9,7 +9,7 @@ package fichier is
     procedure Ouvrir_Fichier(Fic: out File_Type; Nom_Fichier: String);
 
     -- Procedure pour ecrire dans un fichier deja ouvert
-    -- Requiert : Fic doit avoir ete retourne par la fonction Ouvrir_Fichier
+    -- Requiert : Fic doit avoir ete modifie par la procedure Ouvrir_Fichier
     procedure Ecrire_Fichier(Fic: File_Type; Donnees: String);
 
     -- Procedure pour fermer un fichier ouvert
